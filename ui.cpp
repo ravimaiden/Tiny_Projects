@@ -3,21 +3,68 @@
 #include<stdio.h>
 #include<iomanip>
 #include<cstring>
-#include<math>
+#include<math.h>
+
+#include <curses.h>
 
 #include "ui.h"
-#include "user.h"
-#include "train.h"
-#include "admin.h"
+//#include "user.h"
+//#include "train.h"
+//#include "admin.h"
+using namespace std;
 
-int menu1()
+int splash_screen(void)
+{
+	char option;
+	initscr();
+	clr();
+	cout<<"***********************************************************\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*     -------   -------   -------   -------   -------     *\n";
+	cout<<"*        *      *     *   *            *      *           *\n";
+	cout<<"*        *      *_____/   *            *      *           *\n";
+	cout<<"*        *      *    \\   *            *      *           *\n";
+	cout<<"*        *      *     *   *            *      *           *\n";
+	cout<<"*     -------   *     *   *------      *      *------     *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"*                                                         *\n";
+	cout<<"***********************************************************\n";
+	cout<<"Press Enter to continue or Esc to Exit: ";
+	option = getch();
+	endwin();
+	if(option == '\n')
+		return 1;
+	else
+		return 0;
+}
+
+void heading()
+{
+	textcolor(RED);
+	printf("------------------------------------------------------------------\n");
+	printf("USER RAILWAY RESERVATION \n");
+	printf("------------------------------------------------------------------ \n");
+	textcolor(RESET);
+}
+
+
+int user_menu()
 {
 	int choice;
 	heading();
 	cout<<endl;
-	cout<<"\t1 CHECKING AVAILABILITY CUM RESERVATION\n";
-	cout<<"\t2.CANCELLATION                   \n";
-	cout<<"ENTER YOUR CHOICE\n";
+	cout<<"1. CHECKING AVAILABILITY CUM RESERVATION\n"<<endl;
+	cout<<"2. CANCELLATION\n"<<endl;
+	cout<<"3. LOGOUT\n"<<endl;
+	cout<<"ENTER YOUR CHOICE\n"<<endl;
 	cin>>choice;
 	return choice;
 }
@@ -26,28 +73,19 @@ int menu1()
 int  menu()
 {
 	int num;
-	heading();
-	cout<<endl;
-	cout<<"1:REGISTRATION\n";
-	cout<<"2:LOGIN\n";
-	cout<<"3:ADMINISTRATOR\n";
+	cout<<"1. LOGIN\n";
+	cout<<"2. NEW USER\n";
+	cout<<"3. ADMINISTRATOR\n";
+	cout<<"4. EXIT\n";
 	cout<<"enter your choice\n";
 	cin>>num;
 	return num;
 }
 
 
-void heading()
-{
-	textcolor(RED);
-	printf("------------------------------------------------------------------\n");
-	cout<<setw(45);
-	printf("USRR RAILWAY RESERVATION \n");
-	printf("------------------------------------------------------------------ \n");
-}
-
 
 /*code to check validity of the date entered*/
+/*
 void date()
 {
 	int dd,mm,y;
@@ -132,3 +170,4 @@ z:	scanf("%d%d%d",&dd,&mm,&y);
 	getch();
 
 }
+*/

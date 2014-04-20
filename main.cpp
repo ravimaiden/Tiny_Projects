@@ -1,102 +1,157 @@
 #include<iostream>
-#include<fstream>
+//#include<fstream>
 #include<stdio.h>
+#include<stdlib.h>
 #include<iomanip>
 #include<cstring>
-#include<math>
+#include<math.h>
+
 
 #include "ui.h" 
-#include "user.h"
 #include "train.h"
-#include "admin.h"
+#include "user.h"
+#define TRUE 1
+#define FALSE 0
 
-class user u[50];
-class train t;
+#if 0
+#include "admin.h"
+#endif
+
+train t;
+
+user u[50];
 
 struct date dob;
 struct address addr;
 
+using namespace std;
 
 int main()
 {
-	clrscr();
+	int n;
+	if(!splash_screen()) return 0;
+	clr();
 	int r, n;
-	class train tha, t;
+	train my_trains, t;
 	
-	cout<<setw(45)<<"USSR  RAILWAY RESERVATION\n";
-	do
-	{
+	debugfl();
+	//init_users();
+	cout<<setw(45)<<"USER  RAILWAY RESERVATION\n"<<endl;
+	
+	#if 1
+
+	while(1) {
+		clr();
 		r = menu();
 		switch(r) {
-		case 1:
-			clrscr();
-			u[0].regis_getdata();
-			date();
-			u[0].login();
+		case 1: //LOGIN
+			clr();
+			debug("Case 2 Selected\n");
+			/*Display Login Screen*/
 
-
-			do {
-				n=menu1();
-				switch(n) {
-				case 1:
-					clrscr();
-					//train tha;
-					 //  tha.master();
-					tha.display();
-					tha.gett();
-					tha.modify();
-					tha.details();
-					tha.ticket();
-					break;
-				case 2:
-					clrscr();
-					//train t;
-					t.cancellation();
-					t.confirm();
-					t.modification();
-					break;
+			#if 1
+			if(u[0].login() == TRUE) {
+				while(1) {
+					n = user_menu();
+					switch(n) {
+					case 1:
+						clr();
+						//train tha;
+						my_trains.master();
+						my_trains.display();
+						my_trains.gett();
+						my_trains.modify();
+						my_trains.details();
+						my_trains.ticket();
+						break;
+					case 2:
+						clr();
+						//train t;
+						t.cancellation();
+						t.confirm();
+						t.modification();
+						break;
+					case 3:
+						cout<<"Thank You\n";
+						break;
+					default:
+						break;
+					}
 				}
-			} while((n>=0)&&(n<=2));
+			}
+			#endif	
+			debug("Case 2 End\n");
 			break;
-		  //end case 1
-		case 2:
-			clrscr();
+			//end case 2
+
+		
+		case 2: //NEW USER REGISTRATION
+			clr();
+			u[0].regis_getdata();
+			//verify_date();
 			u[0].login();
-			do {
-				n=menu();
+			debug("Case 1 Selected\n");
+			#if 0
+			while(1) {
+				n = user_menu();
 				switch(n) {
 				case 1:
-					clrscr();
-					//train tha;
-					//  tha.master();
+					clr();
+					#if 0
 					tha.display();
 					tha.gett();
 					tha.modify();
 					tha.details();
 					tha.ticket();
+					#endif
+					debugfl();
 					break;
 				case 2:
-					clrscr();
-					//train t;
+					clr();
+					#if 0
 					t.cancellation();
 					t.confirm();
 					t.modification();
+					#endif
+					debugfl();
+					break;
+				case 3:
+					return 0;
+					break;
+				case 4:
+					break;
+				default:
 					break;
 				}
-			} while((n>=0)&&(n<=2));
-				break;
-			  //end case 2
+				if(n == 4) break;
+			}
+			debug("Case 1 End\n");
+			#endif
+			break;
 		case 3:
-
-			clrscr();
+			clr();
+			debug("Case 3 Selected\n");
+			#if 0
 			administration ad;
 			ad.admin();
-			break;	
+			#endif
+			debug("Case 3 End\n");
+			break;
+		case 4:
+			return 0;
+			break;
+		default:
+			cout<<"Please Enter Correct Option\n";
+				
 		}//end of switch
-	} while((r>=1)&&(r<=2));
+	}
+	/*
 	for(int i=0;i<50;i++) {
 		u[i].putfile();
 	}
+	*/
+	debugfl();
+#endif
 return 0;
 }
 
